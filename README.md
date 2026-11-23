@@ -1,68 +1,60 @@
-# HR Dashboard – Análisis de personal
+# Power BI Dashboards
 
-A one-page Power BI dashboard for workforce analysis: headcount, payroll, age distribution, performance, hiring trends and a summary by department, with switchable visual themes.
+A collection of Power BI dashboards that turn operational data into decisions. Each one starts from a business question, documents its data and model, and closes with the insights the data supports.
 
-**Version 1.0**
+## Dashboards
 
-<img width="1260" height="721" alt="dashboard-dorado" src="https://github.com/user-attachments/assets/6112057c-e054-47d2-8e54-f2e6cfe87fc9" />
-<img width="1267" height="730" alt="dashboard-azul" src="https://github.com/user-attachments/assets/dcb3f8bf-3ace-4406-a582-7cb8ee304306" />
+### [HR Dashboard – Análisis de personal](dashboard-RH/)
+Workforce analysis for an HR lead: active headcount, monthly payroll in guaraníes, age distribution, performance, hiring trends, and a summary by department.
 
+- **Three switchable themes** (blue, gold, dark): bookmarks swap the background, and DAX color measures change the chart colors to match
+- **Remodeled data:** department heads linked to the employee table by ID through a Power Query merge
+- **Explicit DAX measure** for active headcount
 
-## Business question
-Who works in the company today, how are they distributed across departments and age groups, how are they performing, and what does payroll look like? The dashboard gives an HR lead a quick, single-page view of the workforce.
+![HR Dashboard](dashboard-RH/screenshots/dashboard-azul.png)
 
-## Data
-`data/bd_integrantes_Esp.xlsx`, two sheets:
+### [Customer Service Tracking – Seguimiento de Servicios](dashboard-ATC/)
+Call center performance in one page: call volume, resolution rate, wait time and customer satisfaction by agent, area and date.
 
-| Sheet | Rows | Content |
-|---|---|---|
-| `integrantes` | 207 employees | Name, ID, salary and job title, birth date, age, sex, hire date, exit date, status, department, recruitment source, performance rating, satisfaction score |
-| `departamentos` | 4 departments | Department code, name, and the employee ID of the department head (`id_responsable`) |
+- KPI cards, resolution breakdown, calls by agent, area and date with drill-down
+- Custom background design
+- Insights on where a supervisor should focus first
 
-Salaries are monthly amounts in guaraníes (PYG).
+<img width="1423" height="803" alt="Customer Service Tracking dashboard" src="https://github.com/user-attachments/assets/2a627178-e69f-4944-97d4-4d83143f04b8" />
 
-**Data source:** dataset adapted from a Zakidata course exercise. Employee names, IDs, salaries, employment status and exit dates were replaced with fictional values, and the department heads were remodeled as employees linked by ID. This is not real company data.
+## Skills shown
 
-## Data model and preparation (Power Query)
-- `integrantes` → `departamentos`: many-to-one relationship on the department code.
-- The combined `Salario-Cargo` field is split into **Salario** and **Cargo**.
-- Age ranges (`Intervalo_edad`) are generated in 5-year buckets.
-- Department heads are stored as an **employee ID**, not a plain name. Power Query merges `departamentos` with `integrantes` to bring in the head's name, so the head is part of the workforce data and stays consistent with it.
-
-## What the dashboard shows
-- **Active employees** and **total monthly payroll** as KPI cards
-- **Employees by age range**
-- **Employees by performance rating**
-- **Employees by hiring year**
-- **Summary by department:** headcount, average salary and department head
-
-## Theme switcher
-The page has two backgrounds (blue and gold), each stored as an image layer. Two color swatches use **bookmarks** to show one background and hide the other, without resetting any filters the user has applied.
-
-## Key insights from the data
-- **178 of 207 employees are active** (86%); 29 have left the company.
-- **Producción is the largest department** with 104 active employees (58%), followed by TI (42), Ventas (24) and Administrativo (8).
-- **TI has the highest average salary** (about Gs. 14.4M per month), almost three times Producción's (about Gs. 5.2M), reflecting a more specialized workforce.
-- **79% of active employees perform as expected**, 15% above expectations and 7% below.
-- **Hiring peaked in 2017** (54 hires) and has slowed since.
-- The active workforce is **58% women**, with a median age of 35.
-
-## Design
-Dashboard design, backgrounds, data model and analysis by **Macarena Chamorro Bykov**. The page layout is based on the original course exercise; the backgrounds were redesigned. Source images are in `layout/`.
-
-| Blue theme | Gold theme |
+| Area | What's used |
 |---|---|
-| ![Blue theme](screenshots/dashboard-azul.png) | ![Gold theme](screenshots/dashboard-dorado.png) |
+| **Business analysis** | Framing each dashboard around a business question; documenting data, model and insights |
+| **Data preparation** | Power Query: type changes, column splits, value replacement, age buckets, merges between tables |
+| **Data modeling** | Relationships between fact and dimension tables; avoiding ambiguous paths with merges |
+| **DAX** | Explicit measures (`CALCULATE`, `DISTINCTCOUNT`); dynamic formatting with `SWITCH(SELECTEDVALUE())` |
+| **Report design** | Custom backgrounds, bookmarks, buttons, theme switching, conditional formatting |
 
-## Tools
-Power BI Desktop, Power Query, Excel.
+## Repository structure
+
+```
+dashboards/
+├── README.md
+├── dashboard-ATC/
+│   ├── README.md
+│   ├── AtencionAlCliente.pbix
+│   └── Datos_de _servicio.xlsx
+└── dashboard-RH/
+    ├── README.md
+    ├── Dashboard_RH.pbix
+    ├── data/
+    ├── layout/
+    └── screenshots/
+```
 
 ## How to open
-Download `Dashboard_RH.pbix` and open it in Power BI Desktop. If prompted, point the data source to `data/bd_integrantes_Esp.xlsx` under **Transform data → Data source settings**.
+Download the `.pbix` file from a dashboard's folder and open it in **Power BI Desktop** (free, Windows). Each folder's README explains its data source and how to reconnect it if needed.
 
-## Roadmap (version 2)
-- A third, dark background
-- Chart colors that change with each theme (DAX color measures with conditional formatting)
-- Explicit DAX measures in place of automatic aggregations
-- Department and hiring-year slicers
-- Performance ratings sorted in logical order
+## About the data
+All datasets are practice data, not real company data. Sources and any changes made to them are described in each dashboard's README.
+
+---
+
+**Macarena Chamorro Bykov** · Business Systems Analyst · [LinkedIn](https://www.linkedin.com/in/macarenachamorrobykov)
