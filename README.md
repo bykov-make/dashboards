@@ -4,7 +4,9 @@ A one-page Power BI dashboard for workforce analysis: headcount, payroll, age di
 
 **Version 1.0**
 
-![HR Dashboard – blue theme](screenshots/dashboard-azul.png)
+<img width="1260" height="721" alt="dashboard-dorado" src="https://github.com/user-attachments/assets/6112057c-e054-47d2-8e54-f2e6cfe87fc9" />
+<img width="1267" height="730" alt="dashboard-azul" src="https://github.com/user-attachments/assets/dcb3f8bf-3ace-4406-a582-7cb8ee304306" />
+
 
 ## Business question
 Who works in the company today, how are they distributed across departments and age groups, how are they performing, and what does payroll look like? The dashboard gives an HR lead a quick, single-page view of the workforce.
